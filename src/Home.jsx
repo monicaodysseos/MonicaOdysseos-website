@@ -66,15 +66,6 @@ function Home() {
           <p style={{ maxWidth: '600px', fontSize: '1.1rem', marginBottom: '32px' }}>
             Monica Odysseos is an AI and Data leader, educator, and speaker working at the intersection of technology, human potential, and organisational change. With a foundation spanning mathematics, computer science, and chartered accountancy, she brings rare cross-disciplinary depth to the challenge of making AI work in the real world, not just technically, but ethically and humanly. Based in Cyprus and active internationally, Monica builds AI-driven solutions for organisations, trains professionals to think critically about intelligent systems, and advocates for a future where technology amplifies human skills rather than replaces them.
           </p>
-          <div className="flex gap-4 items-center">
-            <a href="#media" className="btn">
-              <PlayCircle size={18} />
-              Watch Podcast
-            </a>
-            <a href="#contact" className="btn btn-outline">
-              Get in Touch
-            </a>
-          </div>
         </section>
 
         {/* ABOUT & EXPERTISE */}
