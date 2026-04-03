@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --bg: #0a0a0b;
-  --surface: #141415;
-  --surface-hover: #1c1c1d;
-  --border: #2a2a2b;
-  --text-primary: #ffffff;
-  --text-secondary: #a1a1aa;
-  --accent: #3b82f6; /* Subtle tech blue */
+  --bg: #faf9f6; /* Elegant Creme Background */
+  --surface: #ffffff; /* Pure White Cards */
+  --surface-hover: #f3f0ea; /* Soft Creme Hover */
+  --border: #e3dec9; /* Warm Creme Border */
+  --text-primary: #1c1b1a; /* Very Dark Brown/Grey */
+  --text-secondary: #6e6b66; /* Medium Warm Grey/Brown */
+  --accent: #966f33; /* Luxurious Warm Gold/Brown */
   --font-sans: 'Inter', sans-serif;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -102,9 +102,9 @@ p:last-child {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(10, 10, 11, 0.7);
+  background: rgba(250, 249, 246, 0.7);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid #2a2a2b33;
+  border-bottom: 1px solid var(--border);
   margin: 0 auto;
 }
 
@@ -143,8 +143,8 @@ p:last-child {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: white;
-  color: #000;
+  background: var(--text-primary);
+  color: var(--bg);
   padding: 12px 24px;
   border-radius: 100px;
   font-weight: 500;
@@ -156,7 +156,7 @@ p:last-child {
 }
 
 .btn:hover {
-  background: #f4f4f5;
+  background: var(--text-secondary);
   transform: scale(1.02);
 }
 
@@ -167,8 +167,8 @@ p:last-child {
 }
 
 .btn-outline:hover {
-  background: var(--surface);
-  color: white;
+  background: var(--text-primary);
+  color: var(--bg);
 }
 
 /* Grid */
@@ -185,7 +185,7 @@ p:last-child {
   h1 { font-size: 2.5rem; }
   .section { padding: 80px 0; }
   .header-content {
-    background: #0a0a0b; 
+    background: #faf9f6; 
     border-bottom: 1px solid var(--border);
   }
 }
@@ -276,3 +276,118 @@ p:last-child {
 .mb-2 {
   margin-bottom: 8px;
 }
+
+/* --- PREMIUM ARTICLE READER UI --- */
+
+.progress-container {
+  position: fixed;
+  top: 73px; /* Just below header */
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: transparent;
+  z-index: 99;
+}
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  width: 0%;
+  transition: width 0.1s ease-out;
+}
+
+.art-hero {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.art-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  color: var(--text-primary);
+}
+.art-excerpt {
+  font-size: 1.3rem;
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+.art-byline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+.art-byline img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.art-byline-text {
+  text-align: left;
+}
+.art-author {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+.art-meta {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  opacity: 0;
+  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.article-content {
+  font-size: 1.15rem;
+  line-height: 1.9;
+  color: #2b2a29;
+}
+
+.article-content > p:first-of-type::first-letter {
+  font-size: 4.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  float: left;
+  line-height: 0.8;
+  padding-right: 12px;
+  padding-top: 8px;
+  font-family: 'Times New Roman', serif;
+}
+
+.article-content blockquote {
+  margin: 48px 0;
+  padding: 32px 40px;
+  border-left: 4px solid var(--accent);
+  background: var(--surface);
+  border-radius: 0 16px 16px 0;
+  font-size: 1.35rem;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--text-primary);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  line-height: 1.6;
+}
+
+.article-content img {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 12px;
+  margin: 48px 0;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+}
+
