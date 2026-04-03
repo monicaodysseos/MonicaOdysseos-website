@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ExternalLink, Brain, Cpu, Network, Sparkles, Fingerprint, BookOpen, Scale } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Brain, Cpu, Network, Sparkles, Fingerprint, BookOpen, Scale, Menu, X } from 'lucide-react';
 
 const articles = [
   {
@@ -48,23 +48,59 @@ const articles = [
 ];
 
 function Articles() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const closeMenu = () => setIsMobileMenuOpen(false);
+
+  // Lock body scroll when menu is open
+  React.useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isMobileMenuOpen]);
+
   return (
     <>
-      <header className="header">
-        <div className="header-content">
+      <header className={`header ${isMobileMenuOpen ? 'menu-open' : ''}`}>
+        <div className="header-content relative-z">
           <Link to="/" style={{ fontWeight: 600, fontSize: '1.2rem', letterSpacing: '-0.5px' }}>MO.</Link>
-          <nav className="nav-links">
-            <Link to="/" className="nav-link flex items-center gap-2">
+          
+          {/* Desktop Nav */}
+          <nav className="nav-links desktop-nav">
+            <Link to="/" className="nav-link" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <ArrowLeft size={16} /> Back to Home
             </Link>
           </nav>
+
+          {/* Mobile Menu Toggle Button */}
+          <button 
+            className="mobile-menu-btn" 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
         </div>
       </header>
+
+      {/* Mobile Fullscreen Overlay */}
+      <div className={`mobile-overlay ${isMobileMenuOpen ? 'open' : ''}`}>
+        <nav className="mobile-nav-links">
+          <a href="/#home" className="mobile-nav-link" onClick={closeMenu}>About</a>
+          <a href="/#experience" className="mobile-nav-link" onClick={closeMenu}>Experience</a>
+          <a href="/#media" className="mobile-nav-link" onClick={closeMenu}>Media</a>
+          <Link to="/articles" className="mobile-nav-link" onClick={closeMenu}>AI: What is it really?</Link>
+          <a href="/#contact" className="mobile-nav-link" onClick={closeMenu}>Contact</a>
+        </nav>
+      </div>
 
       <main className="container" style={{ paddingTop: '140px', paddingBottom: '100px', minHeight: '100vh' }}>
         <h1 style={{ marginBottom: '16px', fontSize: '2.5rem' }}>AI: What is it really?</h1>
         <p style={{ maxWidth: '700px', fontSize: '1.1rem', marginBottom: '64px' }}>
-          A comprehensive series dissecting Artificial Intelligence concepts to separate hype from reality, empowering professionals to confidently thrive in an AI-driven world. Originally published via the Grant Thornton AI and Data Lab.
+          A growing body of work exploring what artificial intelligence actually is (and what isn't). Written for curious readers who are tired of the hype and want to understand AI on their own terms: how it thinks, where it breaks, and what it genuinely means for the way we work and live.
         </p>
 
         <div className="grid-2">

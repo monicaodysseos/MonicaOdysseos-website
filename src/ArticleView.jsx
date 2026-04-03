@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { articlesData } from './data/articles';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Menu, X } from 'lucide-react';
 
 function ArticleView() {
   const { slug } = useParams();
@@ -45,18 +45,54 @@ function ArticleView() {
   cleanContent = cleanContent.replace(/\]\(\/(?!cdn-cgi)/g, '](https://www.grantthornton.com.cy/');
   cleanContent = cleanContent.replace(/\]\(\/cdn-cgi/g, '](https://www.grantthornton.com.cy/cdn-cgi');
 
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const closeMenu = () => setIsMobileMenuOpen(false);
+
+  // Lock body scroll when menu is open
+  React.useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isMobileMenuOpen]);
+
   return (
     <>
-      <header className="header" style={{ position: 'sticky', top: 0, paddingBottom: '20px' }}>
-        <div className="header-content">
+      <header className={`header ${isMobileMenuOpen ? 'menu-open' : ''}`}>
+        <div className="header-content relative-z">
           <Link to="/" style={{ fontWeight: 600, fontSize: '1.2rem', letterSpacing: '-0.5px' }}>MO.</Link>
-          <nav className="nav-links">
+          
+          {/* Desktop Nav */}
+          <nav className="nav-links desktop-nav">
              <Link to="/articles" className="nav-link" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <ArrowLeft size={16} /> Back to Series
              </Link>
           </nav>
+
+          {/* Mobile Menu Toggle Button */}
+          <button 
+            className="mobile-menu-btn" 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
         </div>
       </header>
+
+      {/* Mobile Fullscreen Overlay */}
+      <div className={`mobile-overlay ${isMobileMenuOpen ? 'open' : ''}`}>
+        <nav className="mobile-nav-links">
+          <a href="/#home" className="mobile-nav-link" onClick={closeMenu}>About</a>
+          <a href="/#experience" className="mobile-nav-link" onClick={closeMenu}>Experience</a>
+          <a href="/#media" className="mobile-nav-link" onClick={closeMenu}>Media</a>
+          <Link to="/articles" className="mobile-nav-link" onClick={closeMenu}>AI: What is it really?</Link>
+          <a href="/#contact" className="mobile-nav-link" onClick={closeMenu}>Contact</a>
+        </nav>
+      </div>
 
       {/* Reading Progress Bar */}
       <div className="progress-container">
