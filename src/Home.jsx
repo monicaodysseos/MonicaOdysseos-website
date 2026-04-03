@@ -1,23 +1,59 @@
-import React from 'react';
-import { Mail, ExternalLink, PlayCircle, Activity, Database, Users, Code, Award, Target, BookOpen, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { Mail, ExternalLink, PlayCircle, Activity, Database, Users, Code, Award, Target, BookOpen, ArrowRight, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import profileImg from './assets/profile.jpg';
 
 function Home() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const closeMenu = () => setIsMobileMenuOpen(false);
+
+  // Lock body scroll when menu is open
+  React.useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isMobileMenuOpen]);
+
   return (
     <>
-      <header className="header">
-        <div className="header-content">
+      <header className={`header ${isMobileMenuOpen ? 'menu-open' : ''}`}>
+        <div className="header-content relative-z">
           <div style={{ fontWeight: 600, fontSize: '1.2rem', letterSpacing: '-0.5px' }}>MO.</div>
-          <nav className="nav-links">
+          
+          {/* Desktop Nav */}
+          <nav className="nav-links desktop-nav">
             <a href="#home" className="nav-link">About</a>
             <a href="#experience" className="nav-link">Experience</a>
             <a href="#media" className="nav-link">Media</a>
             <Link to="/articles" className="nav-link">AI: What is it really?</Link>
             <a href="#contact" className="nav-link">Contact</a>
           </nav>
+
+          {/* Mobile Menu Toggle Button */}
+          <button 
+            className="mobile-menu-btn" 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
         </div>
       </header>
+
+      {/* Mobile Fullscreen Overlay */}
+      <div className={`mobile-overlay ${isMobileMenuOpen ? 'open' : ''}`}>
+        <nav className="mobile-nav-links">
+          <a href="#home" className="mobile-nav-link" onClick={closeMenu}>About</a>
+          <a href="#experience" className="mobile-nav-link" onClick={closeMenu}>Experience</a>
+          <a href="#media" className="mobile-nav-link" onClick={closeMenu}>Media</a>
+          <Link to="/articles" className="mobile-nav-link" onClick={closeMenu}>AI: What is it really?</Link>
+          <a href="#contact" className="mobile-nav-link" onClick={closeMenu}>Contact</a>
+        </nav>
+      </div>
 
       <main className="container">
         {/* HERO SECTION */}
