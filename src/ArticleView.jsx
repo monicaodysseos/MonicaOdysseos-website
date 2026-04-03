@@ -9,6 +9,19 @@ function ArticleView() {
   const navigate = useNavigate();
   const [article, setArticle] = useState(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const closeMenu = () => setIsMobileMenuOpen(false);
+
+  // Lock body scroll when menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isMobileMenuOpen]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -44,20 +57,6 @@ function ArticleView() {
 
   cleanContent = cleanContent.replace(/\]\(\/(?!cdn-cgi)/g, '](https://www.grantthornton.com.cy/');
   cleanContent = cleanContent.replace(/\]\(\/cdn-cgi/g, '](https://www.grantthornton.com.cy/cdn-cgi');
-
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const closeMenu = () => setIsMobileMenuOpen(false);
-
-  // Lock body scroll when menu is open
-  React.useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => { document.body.style.overflow = ''; };
-  }, [isMobileMenuOpen]);
 
   return (
     <>
