@@ -196,10 +196,10 @@ function Home() {
                   </div>
                   <h3 style={{ fontSize: '1.2rem' }}>The World of Digital Transformation: Artificial Intelligence Demystified</h3>
                   <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '8px' }}>Prime Analysis &middot; Strategy International SI Ltd</p>
-                  <p style={{ fontSize: '0.95rem', marginBottom: '16px' }}>A conversation on what AI actually means for modern organisations &mdash; cutting through the noise to focus on practical application, real risk, and the human decisions that still matter most.</p>
+                  <p style={{ fontSize: '0.95rem', marginBottom: '16px' }}>A conversation on what AI actually means for modern organisations, cutting through the noise to focus on practical application, real risk, and the human decisions that still matter most.</p>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                    <p style={{ fontSize: '0.9rem', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
-                      📺 Shorts from this episode available on TikTok &mdash; <a href="https://www.tiktok.com/@monicaodysseos" target="_blank" rel="noreferrer" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>follow here</a>
+                    <p style={{ fontSize: '0.9rem', fontWeight: 500, margin: 0 }}>
+                      📺 Shorts on TikTok &mdash; <a href="https://www.tiktok.com/@monicaodysseos" target="_blank" rel="noreferrer" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>Follow here</a>
                     </p>
                     <a href="https://www.youtube.com/watch?v=J0TqP6R8DLo" target="_blank" rel="noreferrer" className="btn btn-outline" style={{ display: 'inline-flex', width: 'fit-content', padding: '6px 16px', fontSize: '0.9rem' }}>
                       Watch on YouTube <ExternalLink size={16} />
